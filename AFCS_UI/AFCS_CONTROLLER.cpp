@@ -1,0 +1,142 @@
+#include "AFCS_CONTROLLER.h"
+
+void AFCS_CONTROLLER::SetupPrepar3DInteractions()
+{
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_ELEVATOR_POSITION, "ELEVATOR POSITION", "Position");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_AILERON_POSITION, "AILERON POSITION", "Position");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_GENERAL_ENG_THROTTLE_LEVER_POSITION, "GENERAL ENG THROTTLE LEVER POSITION:1", "Percent");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_GENERAL_ENG_THROTTLE_LEVER_POSITION, "GENERAL ENG THROTTLE LEVER POSITION:2", "Percent");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_GENERAL_ENG_THROTTLE_LEVER_POSITION, "GENERAL ENG THROTTLE LEVER POSITION:3", "Percent");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_GENERAL_ENG_THROTTLE_LEVER_POSITION, "GENERAL ENG THROTTLE LEVER POSITION:4", "Percent");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "GENERAL ENG THROTTLE LEVER POSITION:1", "Percent");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "ROTATION VELOCITY BODY X", "Radians per second");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "ROTATION VELOCITY BODY Y", "Radians per second");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "ROTATION VELOCITY BODY Z", "Radians per second");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "PLANE ALT ABOVE GROUND", "Feet");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "PLANE PITCH DEGREES", "Radians");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "PLANE BANK DEGREES", "Radians");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "PLANE HEADING DEGREES TRUE", "Radians");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "INCIDENCE ALPHA", "Radians");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "AIRSPEED INDICATED", "Knots");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "VERTICAL SPEED", "Feet per second");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "OVERSPEED WARNING", "Bool");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "INDICATED ALTITUDE", "Feet");
+	SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_FLIGHT_PARAMETERS, "G FORCE", "GForce");
+
+	SimConnect_MapClientEventToSimEvent(hSimConnect, JOYSTICK_EVENT_X_AXIS);
+	SimConnect_MapClientEventToSimEvent(hSimConnect, JOYSTICK_EVENT_Y_AXIS);
+	SimConnect_AddClientEventToNotificationGroup(hSimConnect, GROUP_0, JOYSTICK_EVENT_X_AXIS);
+	SimConnect_AddClientEventToNotificationGroup(hSimConnect, GROUP_0, JOYSTICK_EVENT_Y_AXIS);
+	SimConnect_SetNotificationGroupPriority(hSimConnect, GROUP_0, SIMCONNECT_GROUP_PRIORITY_HIGHEST);
+	SimConnect_MapInputEventToClientEvent(hSimConnect, JOYSTICK_INPUT_X_AXIS, "joystick:0:XAxis", JOYSTICK_EVENT_X_AXIS);
+	SimConnect_MapInputEventToClientEvent(hSimConnect, JOYSTICK_INPUT_Y_AXIS, "joystick:0:YAxis", JOYSTICK_EVENT_Y_AXIS);
+	SimConnect_SetInputGroupState(hSimConnect, JOYSTICK_INPUT_X_AXIS, SIMCONNECT_STATE_ON);
+	SimConnect_SetInputGroupState(hSimConnect, JOYSTICK_INPUT_Y_AXIS, SIMCONNECT_STATE_ON);
+
+	SimConnect_RequestDataOnSimObject(hSimConnect, REQUEST_FLIGHT_PARAMETERS, DEFINITION_FLIGHT_PARAMETERS, SIMCONNECT_OBJECT_ID_USER, SIMCONNECT_PERIOD_SIM_FRAME, 0);
+}
+
+void AFCS_CONTROLLER::RunAutoflightLogic(bool OVERRIDE_CONDITION)
+{
+	/// Disengage Autoflight system if any protection is running
+	if (OVERRIDE_CONDITION == true)
+	{
+		AFCS_ENGAGEMENT_STATUS.AUTOTHROTTLE_SPEED = false;
+		AFCS_ENGAGEMENT_STATUS.COMMAND_ROLL = false;
+		AFCS_ENGAGEMENT_STATUS.COMMAND_PITCH = false;
+		emit AutoflightDisengaged();
+	}
+
+	AFCS_AT->NotifyNewData(false, AFCS_ENGAGEMENT_STATUS.AUTOTHROTTLE_SPEED == true);
+	AFCS_CMD_PITCH->NotifyNewData(false, AFCS_ENGAGEMENT_STATUS.COMMAND_PITCH == true);
+	AFCS_CMD_ROLL->NotifyNewData(false, AFCS_ENGAGEMENT_STATUS.COMMAND_ROLL == true);
+}
+
+bool AFCS_CONTROLLER::RunProtectionsLogic()
+{
+	bool AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG = AFCS_ENGAGEMENT_STATUS.DIRECT_MODE;
+	AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG = AFCS_ALFA_PROT->NotifyNewData(
+		AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG,
+		FLIGHT_PARAMETERS.INCIDENCE_ALPHA > AFCS_ALFA_PROT->ALFA_REDUCED_AUTHORITY_THRESHOLD
+	) || AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG;
+	AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG = AFCS_OVERSPEED_PROT->NotifyNewData(
+		AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG,
+		FLIGHT_PARAMETERS.OVERSPEED_WARNING == true
+	) || AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG;
+	AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG = AFCS_PITCH_PROT->NotifyNewData(
+		AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG,
+		FLIGHT_PARAMETERS.PLANE_PITCH_DEGREES < AFCS_PITCH_PROT->PITCH_REDUCED_AUTHORITY_POSITIVE_THRESHOLD ||
+		FLIGHT_PARAMETERS.PLANE_PITCH_DEGREES > AFCS_PITCH_PROT->PITCH_REDUCED_AUTHORITY_NEGATIVE_THRESHOLD
+	) || AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG;
+	AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG = AFCS_MANEUVER_PROT->NotifyNewData(
+		AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG,
+		FLIGHT_PARAMETERS.G_FORCE < AFCS_MANEUVER_PROT->MANEUVER_REDUCED_AUTHORITY_MINIMUM_THRESHOLD ||
+		FLIGHT_PARAMETERS.G_FORCE > AFCS_MANEUVER_PROT->MANEUVER_REDUCED_AUTHORITY_MAXIMUM_THRESHOLD
+	) || AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG;
+
+	bool AFCS_ROLL_PROTECTION_OVERRIDE_FLAG = AFCS_ENGAGEMENT_STATUS.DIRECT_MODE;
+	AFCS_ROLL_PROTECTION_OVERRIDE_FLAG = AFCS_ROLL_PROT->NotifyNewData(
+		AFCS_ROLL_PROTECTION_OVERRIDE_FLAG,
+		abs(FLIGHT_PARAMETERS.PLANE_BANK_DEGREES) > AFCS_ROLL_PROT->ROLL_REDUCED_AUTHORITY_THRESHOLD
+	);
+
+	return AFCS_PITCH_PROTECTIONS_OVERRIDE_FLAG || AFCS_ROLL_PROTECTION_OVERRIDE_FLAG;
+}
+
+void AFCS_CONTROLLER::SimConnectDispatchHandler(SIMCONNECT_RECV* pData, DWORD cbData, void* pContext)
+{
+	switch (pData->dwID)
+	{
+		case SIMCONNECT_RECV_ID_EVENT:
+		{
+			SIMCONNECT_RECV_EVENT* pEvent = (SIMCONNECT_RECV_EVENT*)pData;
+			switch (pEvent->uEventID)
+			{
+				case JOYSTICK_EVENT_X_AXIS: JOYSTICK_INPUT.X_AXIS = static_cast<double> ((long) pEvent->dwData) / JOYSTICK_RESOLUTION; break;
+				case JOYSTICK_EVENT_Y_AXIS: JOYSTICK_INPUT.Y_AXIS = static_cast<double> ((long) pEvent->dwData) / JOYSTICK_RESOLUTION; break;
+			}
+		}
+		break;
+
+		case SIMCONNECT_RECV_ID_SIMOBJECT_DATA:
+		{
+			SIMCONNECT_RECV_SIMOBJECT_DATA* pObjectData = reinterpret_cast<SIMCONNECT_RECV_SIMOBJECT_DATA*>(pData);
+			switch (pObjectData->dwRequestID)
+			{
+				case REQUEST_FLIGHT_PARAMETERS:
+				{
+					FLIGHT_PARAMETERS = *reinterpret_cast<TYPE_FLIGHT_PARAMETERS*>(&pObjectData->dwData);
+					RunAutoflightLogic(RunProtectionsLogic());
+					emit UpdateFlightParameters();
+				}
+				break;
+			}
+		}
+		break;
+
+		case SIMCONNECT_RECV_ID_QUIT: CONNECTION_STATUS = false; break;
+	}
+}
+
+void AFCS_CONTROLLER::SimConnectDispatchHandlerInterface(SIMCONNECT_RECV* pData, DWORD cbData, void* pContext)
+{
+	AFCS_CONTROLLER* pThis = reinterpret_cast<AFCS_CONTROLLER*>(pContext);
+	pThis->SimConnectDispatchHandler(pData, cbData, pContext);
+}
+
+void AFCS_CONTROLLER::run()
+{
+	if (SUCCEEDED(SimConnect_Open(&hSimConnect, "AFCS", NULL, 0, 0, 0)))
+	{
+		CONNECTION_STATUS = true;
+		SetupPrepar3DInteractions();
+		emit InitializeUI();
+
+		while (CONNECTION_STATUS == true)
+		{
+			SimConnect_CallDispatch(hSimConnect, this->SimConnectDispatchHandlerInterface, this);
+		}
+
+		SimConnect_Close(hSimConnect);
+	}
+}

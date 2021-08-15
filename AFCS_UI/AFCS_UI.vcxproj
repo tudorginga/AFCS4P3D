@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E2E9A4F4-960B-4B12-8E2D-CEA9CFCC0947}</ProjectGuid>
+    <Keyword>QtVS_v302</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <QtInstall>msvc2017_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <QtInstall>msvc2017_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+  </PropertyGroup>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>Resources/SIMCONNECT_DEBUG.lib</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <QtRcc Include="AFCS_UI.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Autoflight\AFCS_AUTOTHROTTLE.h" />
+    <ClInclude Include="Autoflight\AFCS_COMMAND_PITCH.h" />
+    <ClInclude Include="Autoflight\AFCS_COMMAND_ROLL.h" />
+    <QtMoc Include="Interfaces\IAFCS_MODULE_THREADED.h" />
+    <ClInclude Include="Utilities\PID_CONTROLLER.h" />
+    <ClInclude Include="Utilities\PID_CONTROLLER_RESTRICTED_OUTPUT.h" />
+    <ClInclude Include="Utilities\UTILS.h" />
+    <QtMoc Include="AFCS_CONTROLLER.h" />
+    <ClInclude Include="AFCS_UI.h" />
+    <ClInclude Include="Interfaces\IAFCS_CONTROLLER.h" />
+    <QtMoc Include="Interfaces\IAFCS_MODULE.h" />
+    <ClInclude Include="Protections\AFCS_ALFA_PROTECTION.h" />
+    <ClInclude Include="Protections\AFCS_MANEUVER_PROTECTION.h" />
+    <ClInclude Include="Protections\AFCS_OVERSPEED_PROTECTION.h" />
+    <ClInclude Include="Protections\AFCS_PITCH_PROTECTION.h" />
+    <ClInclude Include="Protections\AFCS_ROLL_PROTECTION.h" />
+    <ClInclude Include="Resources\SIMCONNECT.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Resources\SIMCONNECT_DEBUG.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="AFCS_UI.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AFCS_CONTROLLER.cpp" />
+    <ClCompile Include="AFCS_UI.cpp" />
+    <ClCompile Include="Autoflight\AFCS_AUTOTHROTTLE.cpp" />
+    <ClCompile Include="Autoflight\AFCS_COMMAND_PITCH.cpp" />
+    <ClCompile Include="Autoflight\AFCS_COMMAND_ROLL.cpp" />
+    <ClCompile Include="Interfaces\IAFCS_MODULE.cpp" />
+    <ClCompile Include="Interfaces\IAFCS_MODULE_THREADED.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Protections\AFCS_ALFA_PROTECTION.cpp" />
+    <ClCompile Include="Protections\AFCS_MANEUVER_PROTECTION.cpp" />
+    <ClCompile Include="Protections\AFCS_OVERSPEED_PROTECTION.cpp" />
+    <ClCompile Include="Protections\AFCS_PITCH_PROTECTION.cpp" />
+    <ClCompile Include="Protections\AFCS_ROLL_PROTECTION.cpp" />
+    <ClCompile Include="Utilities\PID_CONTROLLER.cpp" />
+    <ClCompile Include="Utilities\PID_CONTROLLER_RESTRICTED_OUTPUT.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

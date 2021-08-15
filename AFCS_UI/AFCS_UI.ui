@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AFCS_UIClass</class>
+ <widget class="QWidget" name="AFCS_UIClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>960</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>AFCS</string>
+  </property>
+  <widget class="QLabel" name="CONNECTION_STATUS_LABEL">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>241</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {color: red}</string>
+   </property>
+   <property name="text">
+    <string>Disconnected from Prepar3D!</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>931</width>
+     <height>108</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="FMA_HORIZONTAL_LAYOUT">
+    <item>
+     <layout class="QVBoxLayout" name="AT_PARAMETERS_VERTICAL_LAYOUT">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="AT_MODE_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {background-color: #FFBF00}</string>
+        </property>
+        <property name="text">
+         <string>INOP</string>
+        </property>
+        <property name="margin">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="AT_PARAMETERS_LINE">
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+         </font>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="SPD_ALFA_HORIZONTAL_LAYOUT">
+        <item>
+         <layout class="QVBoxLayout" name="SPD_TEXT_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="SPD_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>SPD</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="SPD_SEL_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>SEL</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="SPD_VAL_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="SPD_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="SPD_SEL_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="SPD_ALFA_LINE">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="ALFA_TEXT_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="ALFA_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>ALFA</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="ALFA_LIM_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>LIM</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="ALFA_VAL_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="ALFA_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="ALFA_LIM_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="AT_PITCH_LINE">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="PITCH_PARAMETERS_VERTICAL_LAYOUT">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="PITCH_MODE_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {background-color: #FFBF00}</string>
+        </property>
+        <property name="text">
+         <string>INOP</string>
+        </property>
+        <property name="margin">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="PITCH_PARAMETERS_LINE">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="PITCH_G_ALT_VS_HORIZONTAL_LAYOUT">
+        <item>
+         <layout class="QVBoxLayout" name="PITCH_TEXT_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="PITCH_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>PITCH</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="PITCH_LIM_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>LIM</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="PITCH_VAL_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="PITCH_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="PITCH_LIM_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="PITCH_G_LINE">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="G_TEXT_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="G_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>G</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="G_LIM_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>LIM</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="G_VAL_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="G_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="G_LIM_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="G_ALT_LINE">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="ALT_TEXT_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="ALT_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>ALT</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="ALT_SEL_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>SEL</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="ALT_VAL_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="ALT_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="ALT_SEL_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="ALT_VS_LINE">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="VS_TEXT_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="VS_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>V/S</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="VS_SEL_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>SEL</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="VS_VAL_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="VS_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="VS_SEL_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="PITCH_ROLL_LINE">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="ROLL_PARAMETERS_VERTICAL_LAYOUT">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="ROLL_MODE_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {background-color: #FFBF00}</string>
+        </property>
+        <property name="text">
+         <string>INOP</string>
+        </property>
+        <property name="margin">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="ROLL_PARAMETERS_LINE">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="BANK_HDG_HORIZONTAL_LAYOUT">
+        <item>
+         <layout class="QVBoxLayout" name="BANK_TEXT_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="BANK_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>BANK</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="BANK_LIM_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>LIM</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="BANK_VAL_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="BANK_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="BANK_LIM_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="BANK_HDG_LINE">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="HDG_TEXT_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="HDG_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>HDG</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="HDG_SEL_TEXT_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>SEL</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="HDG_VAL_VERTICAL_LAYOUT">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="HDG_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="HDG_SEL_VAL_LABEL">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {background-color: #FFBF00}</string>
+            </property>
+            <property name="text">
+             <string>INOP</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="HDG_AFCS_STATUS_LINE">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="AFCS_STATUS_VERTICAL_LAYOUT">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="AFCS_ACTIVE_MODE_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {background-color: #FFBF00}</string>
+        </property>
+        <property name="text">
+         <string>INOP</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="AFCS_CMD_PITCH_STATUS_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {background-color: #FFBF00}</string>
+        </property>
+        <property name="text">
+         <string>INOP</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="AFCS_CMD_ROLL_STATUS_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {background-color: #FFBF00}</string>
+        </property>
+        <property name="text">
+         <string>INOP</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="AFCS_AT_STATUS_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {background-color: #FFBF00}</string>
+        </property>
+        <property name="text">
+         <string>INOP</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="TEST_CONNECTION_PUSH_BUTTON">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>10</y>
+     <width>111</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color: #FFBF00}</string>
+   </property>
+   <property name="text">
+    <string>Test connection</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>210</y>
+     <width>931</width>
+     <height>179</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="AUTO_FLT_HORIZONTAL_LAYOUT">
+    <item>
+     <layout class="QVBoxLayout" name="SPEED_VERTICAL_LAYOUT">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="SPEED_TEXT_LABEL">
+        <property name="text">
+         <string>SPEED</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="SPEED_WINDOW_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>100</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDial" name="SPEED_DIAL">
+        <property name="minimum">
+         <number>100</number>
+        </property>
+        <property name="maximum">
+         <number>400</number>
+        </property>
+        <property name="singleStep">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="SPD_SEL_PUSH_BUTTON">
+        <property name="text">
+         <string>SPD SEL</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="AT_SPEED_PUSH_BUTTON">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: lightgreen</string>
+        </property>
+        <property name="text">
+         <string>AT SPEED</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="SPEED_HEADING_LINE">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="HEADING_VERTICAL_LAYOUT">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="HEADING_TEXT_LABEL">
+        <property name="text">
+         <string>HEADING</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="HEADING_WINDOW_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDial" name="HEADING_DIAL">
+        <property name="maximum">
+         <number>359</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="HDG_SEL_PUSH_BUTTON">
+        <property name="text">
+         <string>HDG SEL</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="CMD_ROLL_PUSH_BUTTON">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: lightgreen</string>
+        </property>
+        <property name="text">
+         <string>CMD ROLL</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="HEADING_ALTITUDE_LINE">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="ALTITUDE_VERTICAL_LAYOUT">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="ALTITUDE_TEXT_LABEL">
+        <property name="text">
+         <string>ALTITUDE</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="ALTITUDE_WINDOW_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDial" name="ALTITUDE_DIAL">
+        <property name="maximum">
+         <number>30000</number>
+        </property>
+        <property name="singleStep">
+         <number>100</number>
+        </property>
+        <property name="pageStep">
+         <number>1000</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ALT_SEL_PUSH_BUTTON">
+        <property name="text">
+         <string>ALT SEL</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="CMD_PITCH_PUSH_BUTTON">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: lightgreen</string>
+        </property>
+        <property name="text">
+         <string>CMD PITCH</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="ALTITUDE_VS_LINE">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="VERTICAL_SPEED_VERTICAL_LAYOUT">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="VERTICAL_SPEED_TEXT_LABEL">
+        <property name="text">
+         <string>VERTICAL SPEED</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="VERTICAL_SPEED_WINDOW_LABEL">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDial" name="VERTICAL_SPEED_DIAL">
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>3000</number>
+        </property>
+        <property name="singleStep">
+         <number>100</number>
+        </property>
+        <property name="pageStep">
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="VERTICAL_SPEED_SEL_PUSH_BUTTON">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>V/S SEL</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="PUSH_TO_LEVEL_OFF_PUSH_BUTTON">
+        <property name="text">
+         <string>PUSH TO LEVEL OFF</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="VS_AUTO_FLT_CTL_LINE">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="AUTO_FLT_CTL_VERTICAL_LAYOUT">
+      <item>
+       <widget class="QPushButton" name="CMD_DISENG_PUSH_BUTTON">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: orange</string>
+        </property>
+        <property name="text">
+         <string>CMD DISENG</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="AT_DISENG_PUSH_BUTTON">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: orange</string>
+        </property>
+        <property name="text">
+         <string>AT DISENG</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="AT_INHIBIT_PUSH_BUTTON">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: red; color: white</string>
+        </property>
+        <property name="text">
+         <string>AT INHIBIT</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="MODE_OVRD_PUSH_BUTTON">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: red; color: white</string>
+        </property>
+        <property name="text">
+         <string>MODE OVRD</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="AFCS_UI.qrc"/>
+ </resources>
+ <connections/>
+</ui>
